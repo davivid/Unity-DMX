@@ -85,13 +85,29 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &914446963
+--- !u!1001 &1240743942
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: levels.Array.size
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: labels.Array.size
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: txPacket.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serial_ports.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -122,7 +138,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serial_ports.Array.data[1]
+      value: \dev\tty
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serial_ports.Array.data[2]
+      value: \dev\tty.Bluetooth-Incoming-Port
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serial_port_idx
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: deviceName
+      value: Bluetooth-Incoming-Port
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: txPacket.Array.data[0]
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: txPacket.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: txPacket.Array.data[4]
+      value: 231
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
@@ -273,4 +317,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
