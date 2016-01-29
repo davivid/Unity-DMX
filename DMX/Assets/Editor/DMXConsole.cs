@@ -8,7 +8,7 @@ public class DMXConsole: EditorWindow {
 	DP.DMX dmx;
 	
 	public Vector2 scroll = new Vector2();
-	[MenuItem ("Window/DMX Pro/Output Levels")]
+	[MenuItem ("Window/DMX/Console")]
 	static void Init () 
 	{
 		// Get existing open window or if none, make a new one:
