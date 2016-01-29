@@ -105,6 +105,10 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
       propertyPath: serial_ports.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -167,6 +171,18 @@ Prefab:
     - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
       propertyPath: txPacket.Array.data[4]
       value: 231
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.data[1]
+      value: \dev\tty
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.data[2]
+      value: \dev\tty.Bluetooth-Incoming-Port
+      objectReference: {fileID: 0}
+    - target: {fileID: 166690, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_Name
+      value: DMXObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57d160f71182049e0ae213474021fdd5, type: 2}

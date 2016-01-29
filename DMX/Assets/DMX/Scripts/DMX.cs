@@ -6,10 +6,20 @@ using System.Threading;
 using System.Collections.Generic;
 using System;
 
-[ExecuteInEditMode]
-public class DMX : MonoBehaviour
+namespace DP
 {
-	//DMX USB Pro API
+[ExecuteInEditMode]
+public class DMX : MonoBehaviour {
+
+	private const int DMX_INDEX_OFFSET = 5;
+	private const int DMX_MESSAGE_OVERHEAD = 6;
+
+	private const int N_DMX_CHANNELS = 512;
+	public int nChannels
+	{
+		get {return N_DMX_CHANNELS;}
+	}
+
 	private const byte DMX_PRO_HEADER_SIZE = 4;
 	private const byte DMX_PRO_START_MSG = 0x7E;
 	private const byte DMX_PRO_LABEL_DMX = 6;
@@ -18,200 +28,145 @@ public class DMX : MonoBehaviour
 	private const byte DMX_PRO_START_CODE_SIZE = 1;
 	private const byte DMX_PRO_END_MSG = 0xE7;
 	private const byte DMX_PRO_END_MSG_SIZE = 1;
-	//
-	
+
+
+	private const int TX_BUFFER_LENGTH = DMX_MESSAGE_OVERHEAD + N_DMX_CHANNELS;
+	private Thread dmxThread;
+	private bool updateDMX;
+
 	private static SerialPort serialPort;
-	
-	public List<string> serial_ports;
-	public int serial_port_idx;
-	public string deviceSerialNumber;
-	public string deviceName;
-	
-	public int nChannels = 24;
-	public byte[] levels;
-	public string[] labels;
-	private byte[] rxPacket;
-	private int rxPacket_idx;
-	private bool rxStarted, rxEnded;
-	
-	public bool sendDMX = false;
-	
-	public byte[] txPacket;
-	
-	void Start()
+	public List<string> serialPorts;
+	public int serialPortIdx;
+
+	private byte[] DMXLevels = new byte[N_DMX_CHANNELS];
+	private byte[] TxBuffer = new byte[DMX_MESSAGE_OVERHEAD + N_DMX_CHANNELS];
+
+	void Start () 
 	{	
-		
-		rxPacket = new byte[600];
-		setChannels();
-		
 		GetPortNames();
+		if (serialPortIdx > 0) OpenSerialPort();
 
-		if (deviceName != "") OpenConnection();
-	}
-	
-	public void setChannels()
-	{
-		levels = new byte[nChannels];
-		labels = new string[nChannels];
-	}
-	
-	public void setLevel(int channel, int val)
-	{
-		int c = channel-1;
-		
-		if (c >= 0 && c < nChannels)
-		{
-			levels[c] = (byte)Mathf.Clamp(val,0,255);
-		}
-		
-		sendDMX = true;
+		initTXBuffer();
+
+		dmxThread = new Thread(ThreadedIO);
+		dmxThread.Start();
+
+		updateDMX = true;
 	}
 
-	public void setLabel(int channel, string label)
+	public byte this[int index]
 	{
-		int c = channel-1;
-		
-		if (c >= 0 && c < nChannels)
+		get
 		{
-			labels[c] = label;
+			if (index < 1 || index > N_DMX_CHANNELS)
+			{
+				throw new UnityException("Channel out fo range: " +index);
+			}
+			else
+			{
+				return DMXLevels[index-1];
+			}
 		}
-	}	
-	
-	void SendPacket(byte label, byte[] data)
-	{
-		if (serialPort == null || !serialPort.IsOpen) return;
+		set
+		{
+			if (index < 1 || index > N_DMX_CHANNELS)
+			{
+				throw new UnityException("Channel out fo range: " +index);
+			}
+			else
+			{
+				if (value < 0 || value > 255)
+				{
+					throw new UnityException("Level out fo range");
+				}
+				else
+				{
+					Debug.Log("set level");
+					DMXLevels[index-1] = value;
+					updateDMX = true;
+				}
+			}
+		}
+	}
 
-		int dataSize = data.Length;
-		if (dataSize > 0) dataSize += DMX_PRO_START_CODE_SIZE;
-		
-		txPacket = new byte[DMX_PRO_HEADER_SIZE + dataSize + DMX_PRO_END_MSG_SIZE];
+	private void ThreadedIO()
+	{
+		while(true)
+		{
+			if (updateDMX)
+			{
+				updateDMX = false;
+				Buffer.BlockCopy(DMXLevels,0,TxBuffer,DMX_INDEX_OFFSET,N_DMX_CHANNELS);
+				if (serialPort != null && serialPort.IsOpen) serialPort.Write(TxBuffer, 0, TX_BUFFER_LENGTH);
+			}
 
-		txPacket[0] = DMX_PRO_START_MSG;
-		txPacket[1] = label;
-		txPacket[2] = (byte)(dataSize & 255);
-		txPacket[3] = (byte)((dataSize >> 8) & 255);
-		
-		if (dataSize > 0)
-		{
-			txPacket[4] = DMX_PRO_START_CODE;
-			
-			for(int i = 0; i < dataSize-1; i++)
-			{
-				txPacket[DMX_PRO_HEADER_SIZE+1 + i] = data[i];  
-			}
-		}
-		
-		txPacket[DMX_PRO_HEADER_SIZE + dataSize] = DMX_PRO_END_MSG;
-		
-		serialPort.Write(txPacket, 0, txPacket.Length);
-	}
-	
-	void ProcessSerialNumber(byte[] data)
-	{	
-		deviceSerialNumber = data[3].ToString("X") + data[2].ToString("X") + data[1].ToString("X") + data[0].ToString("X");
-	}
-	
-	void ProcessRxPacket()
-	{
-		int label = rxPacket[1];
-		int dataSizeLSB = rxPacket[2];
-		int dataSizeMSB = rxPacket[3];
-		
-		byte[] data = new byte[dataSizeLSB];
-		Buffer.BlockCopy(rxPacket,DMX_PRO_HEADER_SIZE,data,0,dataSizeLSB);
-		
-		switch (label)
-		{
-			case DMX_PRO_LABEL_SERIAL_NUMBER:
-				ProcessSerialNumber(data);
-			break;
+			//if (serialPort.BytesToRead > 0)
 		}
 	}
-	
-	void Update()
-	{
-		if (serialPort == null || !serialPort.IsOpen) return;
-		
-		if (sendDMX) 
-		{
-			sendDMX = false;
-			SendPacket(DMX_PRO_LABEL_DMX, levels);
-		}
-		
-		while (serialPort.BytesToRead > 0)
-		{
-			byte inByte = (byte)serialPort.ReadByte();
-			
-			if (inByte == DMX_PRO_START_MSG)
-			{
-				rxPacket_idx = 0;
-				rxStarted = true;
-				rxEnded = false;
-				
-				rxPacket[rxPacket_idx++] = inByte;
-			}
-			
-			else if (inByte == DMX_PRO_END_MSG)
-			{
-				rxEnded = true;
-				if (rxStarted && rxEnded) ProcessRxPacket();
-			}
-			
-			else if (rxStarted) 
-			{
-				rxPacket[rxPacket_idx++] = inByte;
-			}
-			
-			//TODO: if (Timeout) return;
-		}
-	}
-	
-	void GetPortNames()
+
+	private void GetPortNames()
 	{
 		int p = (int)System.Environment.OSVersion.Platform;
-		serial_ports = new List<string>();
-		serial_ports.Add("");
+		serialPorts = new List<string>();
+		serialPorts.Add("");
 		
 		if(p == 4 || p == 128 || p == 6)
 		{
 			string[] ttys = Directory.GetFiles("/dev/", "tty.*");
 			foreach(string dev in ttys)
 			{
-				serial_ports.Add(dev.Replace("/", "\\")); //Replace forward slash to play nicely with gui.		
+				serialPorts.Add(dev.Replace("/", "\\")); //Replace forward slash to play nicely with gui.		
 			}
 		}
 	}
-	
-	public void OpenConnection()
-	{
-		if (serialPort != null) { serialPort.Close(); serialPort.Dispose(); }
 
-		serialPort = new SerialPort(serial_ports[serial_port_idx].Replace("\\", "/"), 57600, Parity.None, 8, StopBits.One);
-		
+	public void OpenSerialPort()
+	{
+		if (serialPort != null)
+		{
+			serialPort.Close();
+			serialPort.Dispose();
+		}
+
+		serialPort = new SerialPort(serialPorts[serialPortIdx].Replace("\\", "/"), 57600, Parity.None, 8, StopBits.One);
+
 		try 
 		{
 			serialPort.Open();
 			serialPort.ReadTimeout = 50;
-			deviceName = serial_ports[serial_port_idx].Replace("\\", "/");
-			SendPacket(DMX_PRO_LABEL_SERIAL_NUMBER, new byte[0]);
+			updateDMX = true;
 		}
 		catch (System.Exception e) 
 		{
-			deviceSerialNumber = "";
-			deviceName = "";
 			Debug.LogException(e);
+			serialPortIdx = 0;
 		}
 	}
-	
+
+	private void initTXBuffer()
+	{
+		for(int i=0; i<TX_BUFFER_LENGTH; i++) TxBuffer[i] = (byte)0x00;
+
+		TxBuffer[000] = DMX_PRO_START_MSG;
+		TxBuffer[001] = DMX_PRO_LABEL_DMX;
+		TxBuffer[002] = (byte)(N_DMX_CHANNELS & 255);
+		TxBuffer[003] = (byte)((N_DMX_CHANNELS >> 8) & 255);
+		TxBuffer[004] = DMX_PRO_START_CODE;
+		TxBuffer[517] = DMX_PRO_END_MSG;
+	}
+
 	void OnApplicationQuit()
 	{
-		for (int i =0; i < nChannels; i++)
+		for(int i=0; i< N_DMX_CHANNELS; i++) DMXLevels[i] = (byte)0x00;
+		updateDMX = true;
+
+		dmxThread.Abort();
+		if (serialPort != null)
 		{
-			levels[i] = 0;
+			serialPort.Close();
+			serialPort.Dispose();
 		}
-
-		SendPacket(DMX_PRO_LABEL_DMX, levels);
-
-		if (serialPort != null) serialPort.Close();
 	}
 }
+}
+
