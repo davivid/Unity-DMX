@@ -4,12 +4,15 @@ Targets Enttec DMX USB Pro Mk2 + Clones
 
 Download the Unity DMX package here: https://github.com/davivid/Unity-DMX/raw/master/DMX/DMX.unitypackage
 
-Currently Supports:
+Features:
 - DMX Output
 - 1 Universe / 512 Channels
-- Retrieve Serial number of device
+- Threaded I/O process
+- Basic Inpsector with Serial port selection
+- Simple DMX console window
+
 
 TODO:
-- Threaded process
 - 2nd Universe 
 - DMX Input
+- Retrieve Serial number of device
