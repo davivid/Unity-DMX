@@ -8,6 +8,7 @@ public class DMXConsole: EditorWindow {
 	DP.DMX dmx;
 	
 	public Vector2 scroll = new Vector2();
+
 	[MenuItem ("Window/DMX/Console")]
 	static void Init () 
 	{

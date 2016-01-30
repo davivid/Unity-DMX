@@ -81,7 +81,6 @@ public class DMX : MonoBehaviour {
 				}
 				else
 				{
-					Debug.Log("set level");
 					DMXLevels[index-1] = value;
 					updateDMX = true;
 				}
@@ -91,13 +90,14 @@ public class DMX : MonoBehaviour {
 
 	private void ThreadedIO()
 	{
+	Debug.Log("Thread Start");
 		while(true)
 		{
 			if (updateDMX)
 			{
 				updateDMX = false;
 				Buffer.BlockCopy(DMXLevels,0,TxBuffer,DMX_INDEX_OFFSET,N_DMX_CHANNELS);
-				if (serialPort != null && serialPort.IsOpen) serialPort.Write(TxBuffer, 0, TX_BUFFER_LENGTH);
+				if (serialPort != null && serialPort.IsOpen) {serialPort.Write(TxBuffer, 0, TX_BUFFER_LENGTH); };
 			}
 
 			//if (serialPort.BytesToRead > 0)
@@ -145,21 +145,23 @@ public class DMX : MonoBehaviour {
 
 	private void initTXBuffer()
 	{
-		for(int i=0; i<TX_BUFFER_LENGTH; i++) TxBuffer[i] = (byte)0x00;
+		for(int i=0; i<TX_BUFFER_LENGTH; i++) TxBuffer[i] = (byte)255;
 
 		TxBuffer[000] = DMX_PRO_START_MSG;
 		TxBuffer[001] = DMX_PRO_LABEL_DMX;
-		TxBuffer[002] = (byte)(N_DMX_CHANNELS & 255);
-		TxBuffer[003] = (byte)((N_DMX_CHANNELS >> 8) & 255);
+		TxBuffer[002] = (byte)(N_DMX_CHANNELS+1 & 255);; 
+		TxBuffer[003] = (byte)((N_DMX_CHANNELS+1 >> 8) & 255);
 		TxBuffer[004] = DMX_PRO_START_CODE;
 		TxBuffer[517] = DMX_PRO_END_MSG;
 	}
 
 	void OnApplicationQuit()
 	{
+		//Reset DMX levels to 0;
 		for(int i=0; i< N_DMX_CHANNELS; i++) DMXLevels[i] = (byte)0x00;
 		updateDMX = true;
 
+		//Clean up
 		dmxThread.Abort();
 		if (serialPort != null)
 		{
