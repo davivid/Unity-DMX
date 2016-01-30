@@ -39,6 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bf5cac7d8e44e48be400ce0c399c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serialPorts: []
+  serialPortIdx: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

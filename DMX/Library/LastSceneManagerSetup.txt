@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Main.unity
+- path: Assets/DMX/DMX Example.unity
   isLoaded: 1
   isActive: 1

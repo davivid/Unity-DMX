@@ -106,7 +106,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
       propertyPath: serialPorts.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
       propertyPath: serial_ports.Array.size
@@ -184,6 +184,14 @@ Prefab:
       propertyPath: m_Name
       value: DMXObject
       objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.data[3]
+      value: \dev\tty.usbserial-ENVWKXJ9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPortIdx
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
   m_IsPrefabParent: 0
@@ -199,6 +207,7 @@ GameObject:
   - 92: {fileID: 1612282354}
   - 124: {fileID: 1612282353}
   - 81: {fileID: 1612282352}
+  - 114: {fileID: 1612282357}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -273,6 +282,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1612282357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1612282351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d92b7105194172b3e4edecceb0f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmxObject: {fileID: 0}
 --- !u!1 &2128553656
 GameObject:
   m_ObjectHideFlags: 0
