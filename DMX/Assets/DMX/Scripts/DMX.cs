@@ -79,11 +79,8 @@ public class DMX : MonoBehaviour {
 				{
 					throw new UnityException("Level out fo range");
 				}
-				else
-				{
-					DMXLevels[index-1] = value;
-					updateDMX = true;
-				}
+				DMXLevels[index-1] = (byte)Mathf.Clamp(value,0,255);
+				updateDMX = true;
 			}
 		}
 	}

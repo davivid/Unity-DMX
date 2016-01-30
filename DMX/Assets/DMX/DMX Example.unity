@@ -85,116 +85,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1240743942
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: levels.Array.size
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: labels.Array.size
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: txPacket.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serialPorts.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serial_ports.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serial_ports.Array.data[1]
-      value: \dev\tty
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serial_ports.Array.data[2]
-      value: \dev\tty.Bluetooth-Incoming-Port
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serial_port_idx
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: deviceName
-      value: Bluetooth-Incoming-Port
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: txPacket.Array.data[0]
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: txPacket.Array.data[1]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: txPacket.Array.data[4]
-      value: 231
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serialPorts.Array.data[1]
-      value: \dev\tty
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serialPorts.Array.data[2]
-      value: \dev\tty.Bluetooth-Incoming-Port
-      objectReference: {fileID: 0}
-    - target: {fileID: 166690, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: m_Name
-      value: DMXObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serialPorts.Array.data[3]
-      value: \dev\tty.usbserial-ENVWKXJ9
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-      propertyPath: serialPortIdx
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1612282351
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +184,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmxObject: {fileID: 0}
+--- !u!1001 &1991518344
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 409762, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.data[1]
+      value: \dev\tty
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.data[2]
+      value: \dev\tty.Bluetooth-Incoming-Port
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426782, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+      propertyPath: serialPorts.Array.data[3]
+      value: \dev\tty.usbserial-ENVWKXJ9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 57d160f71182049e0ae213474021fdd5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2128553656
 GameObject:
   m_ObjectHideFlags: 0
