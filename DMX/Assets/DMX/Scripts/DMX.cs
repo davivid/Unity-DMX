@@ -54,7 +54,7 @@ public class DMX : MonoBehaviour {
 		updateDMX = true;
 	}
 
-	public byte this[int index]
+	public int this[int index]
 	{
 		get
 		{
@@ -64,7 +64,7 @@ public class DMX : MonoBehaviour {
 			}
 			else
 			{
-				return DMXLevels[index-1];
+				return (int)DMXLevels[index-1];
 			}
 		}
 		set

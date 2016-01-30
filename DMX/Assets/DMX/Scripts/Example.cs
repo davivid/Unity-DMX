@@ -17,7 +17,7 @@ public class Example : MonoBehaviour {
 	void Update () 
 	{
 		//Set Value
-		dmx[1] = (byte)(Mathf.PingPong(Time.time*100, 255));
+		dmx[1] = (int)Mathf.PingPong(Time.time*100, 255);
 
 		//Get Value
 		dmx[3] = dmx[1];
