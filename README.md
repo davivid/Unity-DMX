@@ -4,6 +4,8 @@ Targets Enttec DMX USB Pro Mk2 + Clones
 
 Download the Unity DMX package here: https://github.com/davivid/Unity-DMX/raw/master/DMX/DMX.unitypackage
 
+Tested only on OS X
+
 Features:
 - DMX Output
 - 1 Universe / 512 Channels
@@ -13,6 +15,8 @@ Features:
 
 
 TODO:
+- Add Support for 'Open' variant
 - 2nd Universe 
 - DMX Input
 - Retrieve Serial number of device
+
