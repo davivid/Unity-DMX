@@ -164,15 +164,8 @@ public class DMX : MonoBehaviour
 	{
 		int p = (int)System.Environment.OSVersion.Platform;
 		serialPorts = new List<string>();
-		serialPorts.Add("");
-		
-		if(p == 4 || p == 128 || p == 6)
-		{
-			string[] ttys = Directory.GetFiles("/dev/", "tty.*");
-			foreach(string dev in ttys)
-			{
-				serialPorts.Add(dev.Replace("/", "\\")); //Replace forward slash to play nicely with gui.		
-			}
+		foreach (string name in SerialPort.GetPortNames()) {
+			serialPorts.Add(name);
 		}
 	}
 
